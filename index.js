@@ -1,15 +1,18 @@
 'use strict';
 
-const fileReader = require('./lib/reader.js');
+//const fileReader = require('./lib/reader-fixed.js');
+const fileReader = require('./lib/reader-callbacks-array.js');
 
 // Obtain and assert input
-let files = process.argv.slice(2);
+//let files = process.argv[2];
+var array = JSON.parse(process.argv[2]);
 
-if( ! (files instanceof Array && files.length) ) {
+if( ! (Array.isArray(array) && array.length) ) {
   throw new Error('Invalid Args');
 }
 
-fileReader(files, (err,data) => {
+//files must be three files
+fileReader(array, (err,data) => {
   if ( err ) { throw err; }
   console.log('From Callback:', data);
 });

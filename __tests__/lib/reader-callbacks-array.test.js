@@ -1,10 +1,10 @@
 'use strict';
 
 jest.mock('fs');
+jest.setTimeout(10000);
+const reader = require('../../lib/reader-callbacks-array.js');
 
-const reader = require('../../lib/reader-fixed.js');
-
-describe('File Reader Module', () => {
+describe('File Reader Callback Module', () => {
 
   it('when given a bad file, returns an error', done => {
     let files = ['bad.txt'];
@@ -16,12 +16,12 @@ describe('File Reader Module', () => {
   });
 
 
-  it('reads 3 files', done => {
-    let files = ['../files/1.txt', '../files/2.txt', '../files/3.txt'];
+  it('reads 5 files', done => {
+    let files = ['../files/1.txt', '../files/2.txt', '../files/3.txt', '../files/4.txt', '../files/5.txt'];
     reader(files, (err,data) => {
       expect(err).toBeUndefined();
       expect(Array.isArray(data) ).toBeTruthy();
-      expect(data.length ).toBe(3);
+      expect(data.length ).toBe(5);
       done();
     });
   });
